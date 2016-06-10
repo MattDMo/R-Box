@@ -76,7 +76,7 @@ contexts:
         - meta_content_scope: meta.function.parameters.r
         - match: '[a-zA-Z._][a-zA-Z0-9._]*'
           scope: variable.parameter.r
-        - match: '='
+        - match: '(?==)'
           push:
             - include: main
             - match: (?=[,)])
@@ -94,7 +94,7 @@ contexts:
         - meta_content_scope: meta.function.parameters.r
         - match: '[a-zA-Z._][a-zA-Z0-9._]*'
           scope: variable.parameter.r
-        - match: '='
+        - match: '(?==)'
           push:
             - include: main
             - match: (?=[,)])
@@ -109,15 +109,16 @@ contexts:
       push:
         - meta_scope: meta.function-call.r
         - meta_content_scope: meta.function-call.parameters.r
-        - match: '[a-zA-Z._][a-zA-Z0-9._]*'
+        - match: '[a-zA-Z._][a-zA-Z0-9._]*(?=\s*=)'
           scope: variable.parameter.r
-        - match: '='
+        - match: '(?==)'
           push:
             - include: main
             - match: (?=[,)])
               pop: true
         - match: \)
           pop: true
+        - include: main
 
   roxygen:
     - match: ^(#')\s*
